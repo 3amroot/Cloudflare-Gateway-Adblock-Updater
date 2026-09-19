@@ -20,9 +20,10 @@ jobs:
       - name: Install dependencies
         run: pip install requests aiohttp
 
-      - name: Run Gateway updater
+      - name: Run Gateway cleanup and updater
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          FRESH_START: "true"
-        run: python update_gateway.py
+        run: |
+          python cleanup_gateway.py
+          python update_gateway.py
